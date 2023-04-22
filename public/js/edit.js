@@ -1,16 +1,22 @@
+var currentPath = window.location.href.split('/');
+var id = currentPath[currentPath.length - 1];
+
 const loginFormHandler = async (event) => {
     event.preventDefault();
   
+    
     // Collect values from the login form
     const name = document.querySelector('.name').value.trim();
     const description = document.querySelector('.description').value.trim();
   
-    if (name && description) { {
+    if (name && description)  {
     
-      const response = await fetch('/api/posts/id', {
+      const response = await fetch('/api/posts/' + id, {
         method: 'PUT',
         body: JSON.stringify({ name, description}),
         headers: { 'Content-Type': 'application/json' },
+        if(error) {console.log(error)}
+        
       });
   
       if (response.ok) {
@@ -21,7 +27,7 @@ const loginFormHandler = async (event) => {
       }
     }
   };
-}
+
 
   document
   .querySelector('.editbutton')
